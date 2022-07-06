@@ -76,7 +76,7 @@ class spotBezierEnv(spotGymEnv):
                  forward_reward_cap=float("inf"),
                  reflection=True,
                  log_path=None,
-                 desired_velocity=0.5,
+                 desired_velocity=1,
                  desired_rate=0.0,
                  lateral=False,
                  draw_foot_path=False,

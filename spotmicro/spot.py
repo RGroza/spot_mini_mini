@@ -22,7 +22,7 @@ print(pybullet_data.getDataPath())
 from spotmicro.Kinematics.SpotKinematics import SpotModel
 import spotmicro.Kinematics.LieAlgebra as LA
 
-INIT_POSITION = [0, 0, 0.25]
+INIT_POSITION = [0, 0, 0.5]
 INIT_RACK_POSITION = [0, 0, 1]
 # NOTE: URDF IS FACING THE WRONG WAY
 # TEMP FIX
@@ -30,56 +30,31 @@ INIT_ORIENTATION = [0, 0, 0, 1]
 OVERHEAT_SHUTDOWN_TORQUE = 2.45
 OVERHEAT_SHUTDOWN_TIME = 1.0
 # -math.pi / 5
-INIT_LEG_POS = -0.658319
+INIT_LEG_POS = 0
 # math.pi / 3
-INIT_FOOT_POS = 1.0472
+INIT_FOOT_POS = 0
 
-OLD_LEG_POSITION = ["front_left", "front_right", "rear_left", "rear_right"]
-OLD_MOTOR_NAMES = [
-    "motor_front_left_shoulder", "motor_front_left_leg",
-    "foot_motor_front_left", "motor_front_right_shoulder",
-    "motor_front_right_leg", "foot_motor_front_right",
-    "motor_rear_left_shoulder", "motor_rear_left_leg", "foot_motor_rear_left",
-    "motor_rear_right_shoulder", "motor_rear_right_leg",
-    "foot_motor_rear_right"
-]
 
-OLD_MOTOR_LIMITS_BY_NAME = {}
-for name in OLD_MOTOR_NAMES:
-    if "shoulder" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
-    elif "leg" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-2.59, 1.571]
-    elif "foot" in name:
-        OLD_MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.9]
+LEG_POSITION = ["FL", "FR", "RL", "RR"]
 
-OLD_FOOT_NAMES = [
-    "front_left_toe", "front_right_toe", "rear_left_toe", "rear_right_toe"
-]
-
-LEG_POSITION = ["front_left", "front_right", "back_left", "back_right"]
-MOTOR_NAMES = [
-    "motor_front_left_hip", "motor_front_left_upper_leg",
-    "motor_front_left_lower_leg", "motor_front_right_hip",
-    "motor_front_right_upper_leg", "motor_front_right_lower_leg",
-    "motor_back_left_hip", "motor_back_left_upper_leg",
-    "motor_back_left_lower_leg", "motor_back_right_hip",
-    "motor_back_right_upper_leg", "motor_back_right_lower_leg"
-]
+MOTOR_NAMES = [ "FL_Hip", "FL_Femur", "FL_Tibia",
+                "FR_Hip", "FR_Femur", "FR_Tibia",
+                "RL_Hip", "RL_Femur", "RL_Tibia",
+                "RR_Hip", "RR_Femur", "RR_Tibia"]
 
 MOTOR_LIMITS_BY_NAME = {}
 for name in MOTOR_NAMES:
-    if "hip" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-1.04, 1.04]
-    elif "upper_leg" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-1.571, 2.59]
-    elif "lower_leg" in name:
-        MOTOR_LIMITS_BY_NAME[name] = [-2.9, 1.671]
+    if "Hip" in name:
+        if "L_" in name:
+            MOTOR_LIMITS_BY_NAME[name] = [-0.175, 1.571]
+        else:
+            MOTOR_LIMITS_BY_NAME[name] = [-1.571, 0.175]
+    elif "Femur" in name:
+        MOTOR_LIMITS_BY_NAME[name] = [-0.785, 0.785]
+    elif "Tibia" in name:
+        MOTOR_LIMITS_BY_NAME[name] = [-1.571, 0]
 
-FOOT_NAMES = [
-    "front_left_leg_foot", "front_right_leg_foot", "back_left_leg_foot",
-    "back_right_leg_foot"
-]
+FOOT_NAMES = ["FL_Tibia", "FR_Tibia", "RL_Tibia", "RR_Tibia"]
 
 _CHASSIS_NAME_PATTERN = re.compile(r"chassis\D*")
 _MOTOR_NAME_PATTERN = re.compile(r"motor\D*")
@@ -111,15 +86,17 @@ class Spot(object):
 
   """
     INIT_POSES = {
-        'stand':
-        np.array([
-            0.15192765, 0.7552236, -1.5104472, -0.15192765, 0.7552236,
-            -1.5104472, 0.15192765, 0.7552236, -1.5104472, -0.15192765,
-            0.7552236, -1.5104472
-        ]),
-        'liedown':
-        np.array([-0.4, -1.5, 6, 0.4, -1.5, 6, -0.4, -1.5, 6, 0.4, -1.5, 6]),
         'zero':
+        np.array([  0, 0.175, -0.785,
+                    0, 0.175, -0.785,
+                    0, 0.175, -0.785,
+                    0, 0.175, -0.785]),
+        'liedown':
+        np.array([  -0.175, 0.785, -1.571,
+                    0.175, 0.785, -1.571,
+                    -0.175, 0.785, -1.571,
+                    0.175, 0.785, -1.571]),
+        'stand':
         np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]),
     }
 
@@ -297,9 +274,11 @@ class Spot(object):
 
     def _BuildJointNameToIdDict(self):
         num_joints = self._pybullet_client.getNumJoints(self.quadruped)
+        # print(num_joints)
         self._joint_name_to_id = {}
         for i in range(num_joints):
             joint_info = self._pybullet_client.getJointInfo(self.quadruped, i)
+            # print(joint_info)
             self._joint_name_to_id[joint_info[1].decode(
                 "UTF-8")] = joint_info[0]
 
@@ -373,13 +352,13 @@ class Spot(object):
         if reload_urdf:
             if self._self_collision_enabled:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + "/FullAssemblyPyBullet/urdf/FullAssemblyPyBullet.urdf",
                     init_position,
                     useFixedBase=self._on_rack,
                     flags=self._pybullet_client.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
             else:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + "/FullAssemblyPyBullet/urdf/FullAssemblyPyBullet.urdf",
                     init_position,
                     INIT_ORIENTATION,
                     useFixedBase=self._on_rack)
@@ -482,18 +461,18 @@ class Spot(object):
         leg_position = LEG_POSITION[leg_id]
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_hip"],
+            self._joint_name_to_id[leg_position + "_Hip"],
             self.INIT_POSES[self._pose_id][3 * leg_id],
             targetVelocity=0)
 
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_upper_leg"],
+            self._joint_name_to_id[leg_position + "_Femur"],
             self.INIT_POSES[self._pose_id][3 * leg_id + 1],
             targetVelocity=0)
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id["motor_" + leg_position + "_lower_leg"],
+            self._joint_name_to_id[leg_position + "_Tibia"],
             self.INIT_POSES[self._pose_id][3 * leg_id + 2],
             targetVelocity=0)
 
@@ -501,22 +480,19 @@ class Spot(object):
             # Disable the default motor in pybullet.
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id["motor_" + leg_position +
-                                                   "_hip"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_Hip"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id["motor_" + leg_position +
-                                                   "_upper_leg"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_Femur"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id["motor_" + leg_position +
-                                                   "_lower_leg"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_Tibia"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)

@@ -149,6 +149,7 @@ def main():
     env.reset()
 
     spot = SpotModel()
+    print("Spot Model Initialized!")
 
     bz_step = BezierStepper(dt=env._time_step)
     bzg = BezierGait(dt=env._time_step)
@@ -249,26 +250,26 @@ def main():
                      label='Residual: FR (z)',
                      color='blue')
 
-            # BL
+            # RL
             plt.plot(Residuals_act[:, 6],
-                     label='Residual: BL (x)',
+                     label='Residual: RL (x)',
                      color='firebrick')
             plt.plot(Residuals_act[:, 7],
-                     label='Residual: BL (y)',
+                     label='Residual: RL (y)',
                      color='crimson')
             plt.plot(Residuals_act[:, 8],
-                     label='Residual: BL (z)',
+                     label='Residual: RL (z)',
                      color='red')
 
-            # BR
+            # RR
             plt.plot(Residuals_act[:, 9],
-                     label='Residual: BR (x)',
+                     label='Residual: RR (x)',
                      color='gold')
             plt.plot(Residuals_act[:, 10],
-                     label='Residual: BR (y)',
+                     label='Residual: RR (y)',
                      color='orange')
             plt.plot(Residuals_act[:, 11],
-                     label='Residual: BR (z)',
+                     label='Residual: RR (z)',
                      color='coral')
 
             plt.xlabel("Epoch Iteration")

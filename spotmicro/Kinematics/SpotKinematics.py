@@ -8,18 +8,19 @@ from collections import OrderedDict
 
 class SpotModel:
     def __init__(self,
-                 shoulder_length=0.055,
-                 elbow_length=0.10652,
-                 wrist_length=0.145,
-                 hip_x=0.23,
-                 hip_y=0.075,
-                 foot_x=0.23,
-                 foot_y=0.185,
-                 height=0.20,
-                 com_offset=0.016,
-                 shoulder_lim=[-0.548, 0.548],
-                 elbow_lim=[-2.17, 0.97],
-                 wrist_lim=[-0.1, 2.59]):
+                 shoulder_length=0.056,
+                 elbow_length=0.190,
+                 wrist_length=0.240,
+                 hip_x=0.467,
+                 hip_y=0.2,
+                 foot_x=0.467,
+                 foot_y=0.321,
+                 height=0.35,
+                 com_offset=0.024,
+                 shoulder_lim=[-0.175, 1.571],
+                 right_shoulder_lim=[-1.571, 0.175],
+                 elbow_lim=[-0.785, 0.785],
+                 wrist_lim=[-1.571, 0]):
         """
         Spot Micro Kinematics
         """
@@ -50,6 +51,7 @@ class SpotModel:
 
         # Joint Parameters
         self.shoulder_lim = shoulder_lim
+        self.right_shoulder_lim = right_shoulder_lim
         self.elbow_lim = elbow_lim
         self.wrist_lim = wrist_lim
 
@@ -61,15 +63,15 @@ class SpotModel:
                                 self.wrist_lim)
         self.Legs["FR"] = LegIK("RIGHT", self.shoulder_length,
                                 self.elbow_length, self.wrist_length,
-                                self.shoulder_lim, self.elbow_lim,
+                                self.right_shoulder_lim, self.elbow_lim,
                                 self.wrist_lim)
-        self.Legs["BL"] = LegIK("LEFT", self.shoulder_length,
+        self.Legs["RL"] = LegIK("LEFT", self.shoulder_length,
                                 self.elbow_length, self.wrist_length,
                                 self.shoulder_lim, self.elbow_lim,
                                 self.wrist_lim)
-        self.Legs["BR"] = LegIK("RIGHT", self.shoulder_length,
+        self.Legs["RR"] = LegIK("RIGHT", self.shoulder_length,
                                 self.elbow_length, self.wrist_length,
-                                self.shoulder_lim, self.elbow_lim,
+                                self.right_shoulder_lim, self.elbow_lim,
                                 self.wrist_lim)
 
         # Dictionary to store Hip and Foot Transforms
@@ -86,10 +88,10 @@ class SpotModel:
         self.WorldToHip["FR"] = RpToTrans(Rwb, self.ph_FR)
 
         self.ph_BL = np.array([-self.hip_x / 2.0, self.hip_y / 2.0, 0])
-        self.WorldToHip["BL"] = RpToTrans(Rwb, self.ph_BL)
+        self.WorldToHip["RL"] = RpToTrans(Rwb, self.ph_BL)
 
         self.ph_BR = np.array([-self.hip_x / 2.0, -self.hip_y / 2.0, 0])
-        self.WorldToHip["BR"] = RpToTrans(Rwb, self.ph_BR)
+        self.WorldToHip["RR"] = RpToTrans(Rwb, self.ph_BR)
 
         # Transform of Foot relative to world frame
         # With Body Centroid also in world frame
@@ -105,11 +107,11 @@ class SpotModel:
 
         self.pf_BL = np.array(
             [-self.foot_x / 2.0, self.foot_y / 2.0, -self.height])
-        self.WorldToFoot["BL"] = RpToTrans(Rwb, self.pf_BL)
+        self.WorldToFoot["RL"] = RpToTrans(Rwb, self.pf_BL)
 
         self.pf_BR = np.array(
             [-self.foot_x / 2.0, -self.foot_y / 2.0, -self.height])
-        self.WorldToFoot["BR"] = RpToTrans(Rwb, self.pf_BR)
+        self.WorldToFoot["RR"] = RpToTrans(Rwb, self.pf_BR)
 
     def HipToFoot(self, orn, pos, T_bf):
         """
