@@ -6,12 +6,12 @@ import numpy as np
 class LegIK():
     def __init__(self,
                  legtype="RIGHT",
-                 shoulder_length=0.04,
-                 elbow_length=0.1,
-                 wrist_length=0.125,
-                 hip_lim=[-0.548, 0.548],
-                 shoulder_lim=[-2.17, 0.97],
-                 leg_lim=[-0.1, 2.59]):
+                 shoulder_length=0.056,
+                 elbow_length=0.19,
+                 wrist_length=0.24,
+                 hip_lim=[-1.571, 0.175],
+                 shoulder_lim=[-0.785, 0.785],
+                 leg_lim=[-1.571, 0]):
         self.legtype = legtype
         self.shoulder_length = shoulder_length
         self.elbow_length = elbow_length

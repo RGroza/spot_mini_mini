@@ -194,8 +194,8 @@ def ParallelWorker(childPipe, env, nb_states):
                 T_bf_copy = copy.deepcopy(T_bf)
                 T_bf_copy["FL"][:3, 3] += action[2:5]
                 T_bf_copy["FR"][:3, 3] += action[5:8]
-                T_bf_copy["RL"][:3, 3] += action[8:11]
-                T_bf_copy["RR"][:3, 3] += action[11:14]
+                T_bf_copy["BL"][:3, 3] += action[8:11]
+                T_bf_copy["BR"][:3, 3] += action[11:14]
 
                 # Adjust Body Height with action!
                 pos[2] += abs(action[1]) * Z_SCALE
@@ -512,8 +512,8 @@ class ARSAgent():
             T_bf_copy = copy.deepcopy(T_bf)
             T_bf_copy["FL"][:3, 3] += action[2:5]
             T_bf_copy["FR"][:3, 3] += action[5:8]
-            T_bf_copy["RL"][:3, 3] += action[8:11]
-            T_bf_copy["RR"][:3, 3] += action[11:14]
+            T_bf_copy["BL"][:3, 3] += action[8:11]
+            T_bf_copy["BR"][:3, 3] += action[11:14]
 
             # Adjust Height!
             pos[2] += abs(action[1]) * Z_SCALE
