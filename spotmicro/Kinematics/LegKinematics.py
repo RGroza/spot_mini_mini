@@ -7,8 +7,8 @@ class LegIK():
     def __init__(self,
                  legtype="RIGHT",
                  shoulder_length=0.056,
-                 elbow_length=0.19,
-                 wrist_length=0.24,
+                 elbow_length=0.3,
+                 wrist_length=0.242,
                  hip_lim=[-1.571, 0.175],
                  shoulder_lim=[-0.785, 0.785],
                  leg_lim=[-1.571, 0]):

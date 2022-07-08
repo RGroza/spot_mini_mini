@@ -37,10 +37,10 @@ INIT_FOOT_POS = 0
 
 LEG_POSITION = ["FL", "FR", "RL", "RR"]
 
-MOTOR_NAMES = [ "FL_Hip", "FL_Femur", "FL_Tibia",
-                "FR_Hip", "FR_Femur", "FR_Tibia",
-                "RL_Hip", "RL_Femur", "RL_Tibia",
-                "RR_Hip", "RR_Femur", "RR_Tibia"]
+MOTOR_NAMES = [ "FL_HipJoint", "FL_FemurJoint", "FL_TibiaJoint",
+                "FR_HipJoint", "FR_FemurJoint", "FR_TibiaJoint",
+                "RL_HipJoint", "RL_FemurJoint", "RL_TibiaJoint",
+                "RR_HipJoint", "RR_FemurJoint", "RR_TibiaJoint"]
 
 MOTOR_LIMITS_BY_NAME = {}
 for name in MOTOR_NAMES:
@@ -54,7 +54,7 @@ for name in MOTOR_NAMES:
     elif "Tibia" in name:
         MOTOR_LIMITS_BY_NAME[name] = [-1.571, 0]
 
-FOOT_NAMES = ["FL_Tibia", "FR_Tibia", "RL_Tibia", "RR_Tibia"]
+FOOT_NAMES = ["FL_FootJoint", "FR_FootJoint", "RL_FootJoint", "RR_FootJoint"]
 
 _CHASSIS_NAME_PATTERN = re.compile(r"chassis\D*")
 _MOTOR_NAME_PATTERN = re.compile(r"motor\D*")
@@ -274,11 +274,11 @@ class Spot(object):
 
     def _BuildJointNameToIdDict(self):
         num_joints = self._pybullet_client.getNumJoints(self.quadruped)
-        # print(num_joints)
+        print(num_joints)
         self._joint_name_to_id = {}
         for i in range(num_joints):
             joint_info = self._pybullet_client.getJointInfo(self.quadruped, i)
-            # print(joint_info)
+            print(joint_info)
             self._joint_name_to_id[joint_info[1].decode(
                 "UTF-8")] = joint_info[0]
 
@@ -382,6 +382,10 @@ class Spot(object):
         self._motor_enabled_list = [True] * self.num_motors
         self._step_counter = 0
 
+        # for link in range(self._pybullet_client.getNumJoints(self.quadruped)):
+        #     if link % 4 != 3:
+        #         self._pybullet_client.changeVisualShape(self.quadruped, link, rgbaColor=[0, 0, 0, 0.5])
+
         # Perform reset motion within reset_duration if in position control mode.
         # Nothing is performed if in torque control mode for now.
         self._observation_history.clear()
@@ -399,7 +403,7 @@ class Spot(object):
         self.RealisticObservation()
 
         # Set Foot Friction
-        self.SetFootFriction()
+        self.SetFootFriction(500.0)
 
     def _RemoveDefaultJointDamping(self):
         num_joints = self._pybullet_client.getNumJoints(self.quadruped)
@@ -461,18 +465,18 @@ class Spot(object):
         leg_position = LEG_POSITION[leg_id]
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id[leg_position + "_Hip"],
+            self._joint_name_to_id[leg_position + "_HipJoint"],
             self.INIT_POSES[self._pose_id][3 * leg_id],
             targetVelocity=0)
 
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id[leg_position + "_Femur"],
+            self._joint_name_to_id[leg_position + "_FemurJoint"],
             self.INIT_POSES[self._pose_id][3 * leg_id + 1],
             targetVelocity=0)
         self._pybullet_client.resetJointState(
             self.quadruped,
-            self._joint_name_to_id[leg_position + "_Tibia"],
+            self._joint_name_to_id[leg_position + "_TibiaJoint"],
             self.INIT_POSES[self._pose_id][3 * leg_id + 2],
             targetVelocity=0)
 
@@ -480,19 +484,19 @@ class Spot(object):
             # Disable the default motor in pybullet.
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_Hip"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_HipJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_Femur"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_FemurJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_Tibia"]),
+                jointIndex=(self._joint_name_to_id[leg_position + "_TibiaJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)

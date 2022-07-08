@@ -112,6 +112,7 @@ class spotGymEnv(gym.Env):
                  desired_rate=0.0,
                  lateral=False,
                  draw_foot_path=False,
+                 draw_joints=False,
                  height_field=False,
                  height_field_iters=2,
                  AutoStepper=False,
@@ -181,6 +182,7 @@ class spotGymEnv(gym.Env):
         # Enable Rough Terrain or Not
         self.height_field = height_field
         self.draw_foot_path = draw_foot_path
+        self.draw_joints = draw_joints
         # DRAWING FEET PATH
         self.prev_feet_path = np.array([[0.0, 0.0, 0.0], [0.0, 0.0, 0.0],
                                         [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]])
@@ -437,6 +439,9 @@ class spotGymEnv(gym.Env):
         # DRAW FOOT PATH
         if self.draw_foot_path:
             self.DrawFootPath()
+        # DRAW JOINT POSITIONS
+        if self.draw_joints:
+            self.DrawJoints()
         return np.array(self._get_observation()), reward, done, {}
 
     def render(self, mode="rgb_array", close=False):
@@ -471,9 +476,9 @@ class spotGymEnv(gym.Env):
                                                 self.spot._foot_id_list[0])[0]
         FR = self._pybullet_client.getLinkState(self.spot.quadruped,
                                                 self.spot._foot_id_list[1])[0]
-        BL = self._pybullet_client.getLinkState(self.spot.quadruped,
+        RL = self._pybullet_client.getLinkState(self.spot.quadruped,
                                                 self.spot._foot_id_list[2])[0]
-        BR = self._pybullet_client.getLinkState(self.spot.quadruped,
+        RR = self._pybullet_client.getLinkState(self.spot.quadruped,
                                                 self.spot._foot_id_list[3])[0]
 
         lifetime = 3.0  # sec
@@ -484,16 +489,35 @@ class spotGymEnv(gym.Env):
                                                FR, [0, 1, 0],
                                                lifeTime=lifetime)
         self._pybullet_client.addUserDebugLine(self.prev_feet_path[2],
-                                               BL, [0, 0, 1],
+                                               RL, [0, 0, 1],
                                                lifeTime=lifetime)
         self._pybullet_client.addUserDebugLine(self.prev_feet_path[3],
-                                               BR, [1, 1, 0],
+                                               RR, [1, 1, 0],
                                                lifeTime=lifetime)
 
         self.prev_feet_path[0] = FL
         self.prev_feet_path[1] = FR
-        self.prev_feet_path[2] = BL
-        self.prev_feet_path[3] = BR
+        self.prev_feet_path[2] = RL
+        self.prev_feet_path[3] = RR
+
+    def DrawJoints(self):
+        # for motor in range(len(self.spot._motor_id_list) - 1):
+        #     if motor % 4 != 3:
+        #         joint = self._pybullet_client.getLinkState(self.spot.quadruped,
+        #                                                     self.spot._motor_id_list[motor])[0]
+        #         joint2 = self._pybullet_client.getLinkState(self.spot.quadruped,
+        #                                                     self.spot._motor_id_list[motor + 1])[0]
+
+        #         self._pybullet_client.addUserDebugLine(joint, joint2, [1, 0, 0], lineWidth=3.0, lifeTime=0.1)
+
+        joint = self._pybullet_client.getJointState(self.spot.quadruped,
+                                                    self.spot._motor_id_list[1])[0]
+        joint2 = self._pybullet_client.getJointState(self.spot.quadruped,
+                                                    self.spot._motor_id_list[2])[0]
+        if isinstance(joint, list) and isinstance(joint2, list):
+            joint = joint[:-1]
+            joint2 = joint2[:-1]
+            self._pybullet_client.addUserDebugLine(joint, joint2, [1, 0, 0], lineWidth=3.0, lifeTime=0.1)
 
     def get_spot_motor_angles(self):
         """Get the spot's motor angles.

@@ -41,6 +41,10 @@ parser.add_argument("-p",
                     "--DebugPath",
                     help="Draw Spot's Foot Path",
                     action='store_true')
+parser.add_argument("-j",
+                    "--ShowJoints",
+                    help="Show Current Joint Positions",
+                    action='store_true')
 parser.add_argument("-gui",
                     "--GUI",
                     help="Control The Robot Yourself With a GUI",
@@ -95,6 +99,11 @@ def main():
     else:
         draw_foot_path = False
 
+    if ARGS.ShowJoints:
+        draw_joints = True
+    else:
+        draw_joints = False
+
     if ARGS.HeightField:
         height_field = True
     else:
@@ -133,6 +142,7 @@ def main():
                         on_rack=on_rack,
                         height_field=height_field,
                         draw_foot_path=draw_foot_path,
+                        draw_joints=draw_joints,
                         contacts=contacts,
                         env_randomizer=env_randomizer)
 

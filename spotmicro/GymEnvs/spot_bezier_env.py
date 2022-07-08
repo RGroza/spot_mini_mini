@@ -80,6 +80,7 @@ class spotBezierEnv(spotGymEnv):
                  desired_rate=0.0,
                  lateral=False,
                  draw_foot_path=False,
+                 draw_joints=False,
                  height_field=False,
                  AutoStepper=True,
                  action_dim=14,
@@ -123,6 +124,7 @@ class spotBezierEnv(spotGymEnv):
             desired_rate=desired_rate,
             lateral=lateral,
             draw_foot_path=draw_foot_path,
+            draw_joints=draw_joints,
             height_field=height_field,
             AutoStepper=AutoStepper,
             contacts=contacts)
@@ -191,6 +193,10 @@ class spotBezierEnv(spotGymEnv):
         # DRAW FOOT PATH
         if self.draw_foot_path:
             self.DrawFootPath()
+
+        # DRAW JOINT POSITIONS
+        if self.draw_joints:
+            self.DrawJoints()
 
         return np.array(self._get_observation()), reward, done, {}
 

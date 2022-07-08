@@ -9,8 +9,8 @@ from collections import OrderedDict
 class SpotModel:
     def __init__(self,
                  shoulder_length=0.056,
-                 elbow_length=0.19,
-                 wrist_length=0.24,
+                 elbow_length=0.3,
+                 wrist_length=0.242,
                  hip_x=0.467,
                  hip_y=0.2,
                  foot_x=0.467,
