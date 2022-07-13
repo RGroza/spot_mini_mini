@@ -54,7 +54,7 @@ class spotBezierEnv(spotGymEnv):
                  urdf_version=None,
                  distance_limit=float("inf"),
                  observation_noise_stdev=SENSOR_NOISE_STDDEV,
-                 self_collision_enabled=True,
+                 self_collision_enabled=False,
                  motor_velocity_limit=np.inf,
                  pd_control_enabled=False,
                  leg_model_enabled=False,
@@ -84,7 +84,8 @@ class spotBezierEnv(spotGymEnv):
                  height_field=False,
                  AutoStepper=True,
                  action_dim=14,
-                 contacts=True):
+                 contacts=True,
+                 state_logging=True):
 
         super(spotBezierEnv, self).__init__(
             distance_weight=distance_weight,
@@ -127,7 +128,8 @@ class spotBezierEnv(spotGymEnv):
             draw_joints=draw_joints,
             height_field=height_field,
             AutoStepper=AutoStepper,
-            contacts=contacts)
+            contacts=contacts,
+            state_logging=state_logging)
 
         # Residuals + Clearance Height + Penetration Depth
         action_high = np.array([self._action_bound] * action_dim)

@@ -26,6 +26,7 @@ from spotmicro.heightfield import HeightField
 from spotmicro.OpenLoopSM.SpotOL import BezierStepper
 import spotmicro.Kinematics.LieAlgebra as LA
 from spotmicro.spot_env_randomizer import SpotEnvRandomizer
+import os
 
 NUM_SUBSTEPS = 5
 NUM_MOTORS = 12
@@ -116,7 +117,8 @@ class spotGymEnv(gym.Env):
                  height_field=False,
                  height_field_iters=2,
                  AutoStepper=False,
-                 contacts=True):
+                 contacts=True,
+                 state_logging=True):
         """Initialize the spot gym environment.
 
     Args:
@@ -293,6 +295,21 @@ class spotGymEnv(gym.Env):
             # Do 3x for extra roughness
             for i in range(height_field_iters):
                 self.hf._generate_field(self)
+
+        self.loggerID = -1
+        if state_logging:
+            filenames = os.listdir('logs')
+            newLogID = 1
+            if len(filenames) != 0:
+                logIDs = []
+                for f in filenames:
+                    if f[-4:] != ".csv":
+                        logIDs.append(int(f[3:]))
+
+                newLogID = max(logIDs) + 1
+
+            self.loggerID = pybullet.startStateLogging(
+                pybullet.STATE_LOGGING_GENERIC_ROBOT, "logs/log" + str(newLogID))
 
     def set_env_randomizer(self, env_randomizer):
         self._env_randomizer = env_randomizer
@@ -513,11 +530,12 @@ class spotGymEnv(gym.Env):
         joint = self._pybullet_client.getJointState(self.spot.quadruped,
                                                     self.spot._motor_id_list[1])[0]
         joint2 = self._pybullet_client.getJointState(self.spot.quadruped,
-                                                    self.spot._motor_id_list[2])[0]
+                                                     self.spot._motor_id_list[2])[0]
         if isinstance(joint, list) and isinstance(joint2, list):
             joint = joint[:-1]
             joint2 = joint2[:-1]
-            self._pybullet_client.addUserDebugLine(joint, joint2, [1, 0, 0], lineWidth=3.0, lifeTime=0.1)
+            self._pybullet_client.addUserDebugLine(
+                joint, joint2, [1, 0, 0], lineWidth=3.0, lifeTime=0.1)
 
     def get_spot_motor_angles(self):
         """Get the spot's motor angles.

@@ -440,7 +440,7 @@ class BezierGait():
                            vel,
                            T_bf_,
                            T_bf_curr,
-                           clearance_height=0.06,
+                           clearance_height=0.065,
                            penetration_depth=0.01,
                            contacts=[0, 0, 0, 0],
                            dt=None):

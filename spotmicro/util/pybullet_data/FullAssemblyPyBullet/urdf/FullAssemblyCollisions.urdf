@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="FullAssemblyPyBullet">
+  <link
+    name="MainBody">
+    <inertial>
+      <origin
+        xyz="0.0715878232956685 -0.000237379436129198 0.0384948762748406"
+        rpy="0 0 0" />
+      <mass
+        value="1.84238098815425" />
+      <inertia
+        ixx="0.00433419520410736"
+        ixy="-3.43872307352775E-07"
+        ixz="2.81226041199482E-06"
+        iyy="0.00397090376565795"
+        iyz="1.19851821233543E-08"
+        izz="0.00734145267452479" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/MainBody.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/MainBodyCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.046482 -0.013937 -0.00013148"
+        rpy="0 0 0" />
+      <mass
+        value="0.092628" />
+      <inertia
+        ixx="2.6348E-05"
+        ixy="1.0623E-06"
+        ixz="2.1924E-09"
+        iyy="4.2592E-05"
+        iyz="-1.0475E-07"
+        izz="2.9112E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_HipLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_HipJoint"
+    type="revolute">
+    <origin
+      xyz="0.2878 0.1 0.037867"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0192209156804703 0.0445309182127519 -0.0180483752178875"
+        rpy="0 0 0" />
+      <mass
+        value="0.162698622822929" />
+      <inertia
+        ixx="0.000127956505961249"
+        ixy="-2.78799082360888E-06"
+        ixz="-8.05949151113358E-05"
+        iyy="0.000233954696541105"
+        iyz="-2.77405486023301E-06"
+        izz="0.000124359017081187" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_FemurLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 -0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FL_HipLink" />
+    <child
+      link="FL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0322017175929247 2.39643160091924E-05 -0.0962232443701754"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672208230102" />
+      <inertia
+        ixx="0.000411262084213936"
+        ixy="-9.2367440160798E-07"
+        ixz="0.000137528054915283"
+        iyy="0.000471917665954904"
+        iyz="2.15761541593598E-06"
+        izz="6.64698615962587E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_TibiaLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 0.0695 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FL_FemurLink" />
+    <child
+      link="FL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340694607176006 1.29750904465098E-10 0.00531238344111958"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710083689234" />
+      <inertia
+        ixx="1.42176481764722E-07"
+        ixy="5.41889134310939E-14"
+        ixz="2.06504219972565E-08"
+        iyy="3.94491238638296E-07"
+        iyz="-1.26336438823713E-14"
+        izz="4.62835009996335E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FL_FootLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.063753 0 -0.2336"
+      rpy="0 0 0" />
+    <parent
+      link="FL_TibiaLink" />
+    <child
+      link="FL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="FR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.046481 0.013937 -0.0001314"
+        rpy="0 0 0" />
+      <mass
+        value="0.092628" />
+      <inertia
+        ixx="2.6348E-05"
+        ixy="-1.0624E-06"
+        ixz="2.0949E-09"
+        iyy="4.2592E-05"
+        iyz="1.0467E-07"
+        izz="2.9112E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_HipLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="0.2878 -0.1 0.037867"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.019221 -0.044531 -0.018048"
+        rpy="0 0 0" />
+      <mass
+        value="0.1627" />
+      <inertia
+        ixx="0.00012796"
+        ixy="2.788E-06"
+        ixz="-8.0595E-05"
+        iyy="0.00023396"
+        iyz="2.774E-06"
+        izz="0.00012436" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_FemurLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FR_HipLink" />
+    <child
+      link="FR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.032202 -2.3915E-05 -0.096223"
+        rpy="0 0 0" />
+      <mass
+        value="0.10967" />
+      <inertia
+        ixx="0.00041126"
+        ixy="9.237E-07"
+        ixz="0.00013753"
+        iyy="0.00047192"
+        iyz="-2.1577E-06"
+        izz="6.647E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_TibiaLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 -0.0695 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FR_FemurLink" />
+    <child
+      link="FR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00034072 -7.9292E-11 0.0053124"
+        rpy="0 0 0" />
+      <mass
+        value="0.0026171" />
+      <inertia
+        ixx="1.4218E-07"
+        ixy="5.5508E-14"
+        ixz="2.065E-08"
+        iyy="3.9449E-07"
+        iyz="4.5519E-15"
+        izz="4.6284E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/FR_FootLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="FR_TibiaLink" />
+    <child
+      link="FR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0464816397695236 -0.0139368080927127 -0.000131481968210667"
+        rpy="0 0 0" />
+      <mass
+        value="0.0926275808970222" />
+      <inertia
+        ixx="2.63476335895186E-05"
+        ixy="1.06227394054547E-06"
+        ixz="2.19244911810716E-09"
+        iyy="4.25915461101412E-05"
+        iyz="-1.04752135142927E-07"
+        izz="2.91123101637658E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_HipLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1794 0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0192209157084936 0.0445309180696282 -0.0180483751384094"
+        rpy="0 0 0" />
+      <mass
+        value="0.162698622211317" />
+      <inertia
+        ixx="0.000127956505837031"
+        ixy="-2.78799083584666E-06"
+        ixz="-8.05949147183128E-05"
+        iyy="0.000233954695159349"
+        iyz="-2.77405486253497E-06"
+        izz="0.000124359015823803" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_FemurLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 -0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="RL_HipLink" />
+    <child
+      link="RL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.032201717592925 2.39643160091438E-05 -0.0962232443701748"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672208230101" />
+      <inertia
+        ixx="0.000411262084213933"
+        ixy="-9.23674401607972E-07"
+        ixz="0.000137528054915283"
+        iyy="0.000471917665954898"
+        iyz="2.15761541593597E-06"
+        izz="6.64698615962559E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_TibiaLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 0.0695 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="RL_FemurLink" />
+    <child
+      link="RL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340694607175784 1.29750980792931E-10 0.00531238344111906"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710083689218" />
+      <inertia
+        ixx="1.42176481764706E-07"
+        ixy="5.4188914000448E-14"
+        ixz="2.06504219972602E-08"
+        iyy="3.94491238638248E-07"
+        iyz="-1.26336445406927E-14"
+        izz="4.62835009996293E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RL_FootLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692006 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RL_TibiaLink" />
+    <child
+      link="RL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0464814378828992 0.0139367872200231 -0.000131456647172234"
+        rpy="0 0 0" />
+      <mass
+        value="0.0926285030937892" />
+      <inertia
+        ixx="2.63479448635204E-05"
+        ixy="-1.06236260344068E-06"
+        ixz="2.09302194470485E-09"
+        iyy="4.25918877263146E-05"
+        iyz="1.0470630347238E-07"
+        izz="2.91125133706959E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_HipLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1794 -0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0192209202181282 -0.0445309198933593 -0.0180483792970792"
+        rpy="0 0 0" />
+      <mass
+        value="0.16269859820821" />
+      <inertia
+        ixx="0.000127956696378493"
+        ixy="2.78797474241714E-06"
+        ixz="-8.0595104072781E-05"
+        iyy="0.000233955011789736"
+        iyz="2.77402832806753E-06"
+        izz="0.000124359142518746" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_FemurLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="RR_HipLink" />
+    <child
+      link="RR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0322016962666146 -2.39145069413915E-05 -0.0962231575946958"
+        rpy="0 0 0" />
+      <mass
+        value="0.109672400053178" />
+      <inertia
+        ixx="0.000411263099234666"
+        ixy="9.23702371695806E-07"
+        ixz="0.000137528330485258"
+        iyy="0.000471918768709001"
+        iyz="-2.15772655059984E-06"
+        izz="6.64699651574824E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_TibiaLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 -0.0695 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="RR_FemurLink" />
+    <child
+      link="RR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.000340717980085947 -7.92921839298799E-11 0.00531238163968045"
+        rpy="0 0 0" />
+      <mass
+        value="0.00261710077329806" />
+      <inertia
+        ixx="1.42176397424821E-07"
+        ixy="5.5507760827789E-14"
+        ixz="2.0649850204884E-08"
+        iyy="3.94491214620179E-07"
+        iyz="4.55187258855279E-15"
+        izz="4.62835064651932E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyPyBullet/meshes/RR_FootLinkCollision.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692006 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RR_TibiaLink" />
+    <child
+      link="RR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

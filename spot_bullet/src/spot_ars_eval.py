@@ -288,6 +288,9 @@ def main():
             plt.legend()
             plt.show()
 
+    if env.state_logging == True:
+        env._pybullet_client.stopStateLogging(env.loggerID)
+
     env.close()
 
 
