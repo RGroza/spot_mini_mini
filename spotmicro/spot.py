@@ -11,6 +11,8 @@ Example: minitaur.py
 https://github.com/bulletphysics/bullet3/blob/master/examples/pybullet/gym/pybullet_envs/bullet/minitaur.py
 """
 
+import spotmicro.Kinematics.LieAlgebra as LA
+from spotmicro.Kinematics.SpotKinematics import SpotModel
 import collections
 import copy
 import math
@@ -19,8 +21,6 @@ import numpy as np
 from . import motor
 from spotmicro.util import pybullet_data
 print(pybullet_data.getDataPath())
-from spotmicro.Kinematics.SpotKinematics import SpotModel
-import spotmicro.Kinematics.LieAlgebra as LA
 
 INIT_POSITION = [0, 0, 0.5]
 INIT_RACK_POSITION = [0, 0, 1]
@@ -37,10 +37,10 @@ INIT_FOOT_POS = 0
 
 LEG_POSITION = ["FL", "FR", "RL", "RR"]
 
-MOTOR_NAMES = [ "FL_HipJoint", "FL_FemurJoint", "FL_TibiaJoint",
-                "FR_HipJoint", "FR_FemurJoint", "FR_TibiaJoint",
-                "RL_HipJoint", "RL_FemurJoint", "RL_TibiaJoint",
-                "RR_HipJoint", "RR_FemurJoint", "RR_TibiaJoint"]
+MOTOR_NAMES = ["FL_HipJoint", "FL_FemurJoint", "FL_TibiaJoint",
+               "FR_HipJoint", "FR_FemurJoint", "FR_TibiaJoint",
+               "RL_HipJoint", "RL_FemurJoint", "RL_TibiaJoint",
+               "RR_HipJoint", "RR_FemurJoint", "RR_TibiaJoint"]
 
 MOTOR_LIMITS_BY_NAME = {}
 for name in MOTOR_NAMES:
@@ -87,15 +87,15 @@ class Spot(object):
   """
     INIT_POSES = {
         'zero':
-        np.array([  0, 0.175, -0.785,
-                    0, 0.175, -0.785,
-                    0, 0.175, -0.785,
-                    0, 0.175, -0.785]),
+        np.array([0, 0.175, -0.785,
+                  0, 0.175, -0.785,
+                  0, 0.175, -0.785,
+                  0, 0.175, -0.785]),
         'liedown':
-        np.array([  -0.175, 0.785, -1.571,
-                    0.175, 0.785, -1.571,
-                    -0.175, 0.785, -1.571,
-                    0.175, 0.785, -1.571]),
+        np.array([-0.175, 0.785, -1.571,
+                  0.175, 0.785, -1.571,
+                  -0.175, 0.785, -1.571,
+                  0.175, 0.785, -1.571]),
         'stand':
         np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]),
     }
@@ -484,19 +484,22 @@ class Spot(object):
             # Disable the default motor in pybullet.
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_HipJoint"]),
+                jointIndex=(
+                    self._joint_name_to_id[leg_position + "_HipJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_FemurJoint"]),
+                jointIndex=(
+                    self._joint_name_to_id[leg_position + "_FemurJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
             self._pybullet_client.setJointMotorControl2(
                 bodyIndex=self.quadruped,
-                jointIndex=(self._joint_name_to_id[leg_position + "_TibiaJoint"]),
+                jointIndex=(
+                    self._joint_name_to_id[leg_position + "_TibiaJoint"]),
                 controlMode=self._pybullet_client.VELOCITY_CONTROL,
                 targetVelocity=0,
                 force=knee_friction_force)
@@ -970,7 +973,7 @@ class Spot(object):
             self._pybullet_client.changeDynamics(
                 self.quadruped, link_id, localInertiaDiagonal=motor_inertia)
 
-    def SetFootFriction(self, foot_friction=100.0):
+    def SetFootFriction(self, foot_friction=50.0):
         """Set the lateral friction of the feet.
 
         Args:

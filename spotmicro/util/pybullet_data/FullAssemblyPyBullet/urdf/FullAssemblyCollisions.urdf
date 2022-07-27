@@ -254,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://FullAssemblyPyBullet/meshes/FL_FootLinkCollision.STL" />
+          filename="package://FullAssemblyPyBullet/meshes/FL_FootLinkCollision_Sphere.STL" />
       </geometry>
     </collision>
   </link>
@@ -481,7 +481,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://FullAssemblyPyBullet/meshes/FR_FootLinkCollision.STL" />
+          filename="package://FullAssemblyPyBullet/meshes/FR_FootLinkCollision_Sphere.STL" />
       </geometry>
     </collision>
   </link>
@@ -708,7 +708,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://FullAssemblyPyBullet/meshes/RL_FootLinkCollision.STL" />
+          filename="package://FullAssemblyPyBullet/meshes/RL_FootLinkCollision_Sphere.STL" />
       </geometry>
     </collision>
   </link>
@@ -935,7 +935,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://FullAssemblyPyBullet/meshes/RR_FootLinkCollision.STL" />
+          filename="package://FullAssemblyPyBullet/meshes/RR_FootLinkCollision_Sphere.STL" />
       </geometry>
     </collision>
   </link>
