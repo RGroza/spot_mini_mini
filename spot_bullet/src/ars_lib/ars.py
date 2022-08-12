@@ -60,6 +60,7 @@ def ParallelWorker(childPipe, env, nb_states):
     # common normalizer
     normalizer = Normalizer(nb_states)
     max_action = float(env.action_space.high[0])
+    print("ParallelWorker Reset")
     _ = env.reset()
     n = 0
     while True:

@@ -113,6 +113,7 @@ def main():
     print("ACTION DIM: {}".format(action_dim))
     max_action = float(env.action_space.high[0])
 
+    print("Reset 1")
     env.reset()
 
     g_u_i = GUI(env.spot.quadruped)
@@ -137,7 +138,9 @@ def main():
         print("Loading Existing agent")
         agent.load(models_path + "/" + file_name + str(agent_num))
 
+    print("Reset 2")
     env.reset(agent.desired_velocity, agent.desired_rate)
+    print("Done")
 
     episode_reward = 0
     episode_timesteps = 0
@@ -157,10 +160,13 @@ def main():
 
     # Start multiprocessing
     # Start multiprocessing
+    print("Start multiprocessing")
     for proc_num in range(num_processes):
         p = mp.Process(target=ParallelWorker,
                        args=(childPipes[proc_num], env, state_dim))
+        print("Starting")
         p.start()
+        print("Appending")
         processes.append(p)
 
     print("STARTED SPOT TRAINING ENV")
