@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="FullAssemblyCollisions">
+  <link
+    name="MainBody">
+    <inertial>
+      <origin
+        xyz="0.0548070028454429 -0.000360234225217554 0.039582134703277"
+        rpy="0 0 0" />
+      <mass
+        value="9.13070284945046" />
+      <inertia
+        ixx="0.0538805916941477"
+        ixy="-0.000430907142034246"
+        ixz="-0.00346466515215267"
+        iyy="0.199179331205701"
+        iyz="0.000132154403635104"
+        izz="0.242402062963846" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/MainBody.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/MainBody.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0495780689695432 -0.0168646109812234 -3.14997337524936E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.184246862844944" />
+      <inertia
+        ixx="8.5666630921348E-05"
+        ixy="-2.71433694305197E-06"
+        ixz="3.07107849372899E-09"
+        iyy="0.000132334131938758"
+        iyz="-3.26143525136387E-10"
+        izz="0.000102345114819944" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_HipJoint"
+    type="revolute">
+    <origin
+      xyz="0.2808 0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0292994658484786 0.0576930805258912 -0.0271697654017704"
+        rpy="0 0 0" />
+      <mass
+        value="0.493837207405452" />
+      <inertia
+        ixx="0.00120611588222183"
+        ixy="0.000236549205364421"
+        ixz="-0.000868352985021879"
+        iyy="0.00199589674409198"
+        iyz="0.000216551652666458"
+        izz="0.00126368445819122" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 -0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FL_HipLink" />
+    <child
+      link="FL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0348034273391615 3.46944695195361E-17 -0.101297406567852"
+        rpy="0 0 0" />
+      <mass
+        value="0.27925717852908" />
+      <inertia
+        ixx="0.00109125951304497"
+        ixy="1.2644462449977E-19"
+        ixz="0.00041247807973686"
+        iyy="0.00127521789331124"
+        iyz="-4.12105426442255E-19"
+        izz="0.000233119279403158" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 0.0745 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FL_FemurLink" />
+    <child
+      link="FL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00808442270239479 -7.17880199729848E-10 0.0114064405962385"
+        rpy="0 0 0" />
+      <mass
+        value="0.0456321719316135" />
+      <inertia
+        ixx="9.09013287822567E-06"
+        ixy="-5.14601586641631E-11"
+        ixz="1.51548236610828E-07"
+        iyy="9.3243545562533E-06"
+        iyz="1.79287300459604E-12"
+        izz="1.41628502683047E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FL_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.063753 0 -0.2336"
+      rpy="0 0 0" />
+    <parent
+      link="FL_TibiaLink" />
+    <child
+      link="FL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="FR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0495780689695431 0.0168646109812234 -3.14997337519385E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.184246862844944" />
+      <inertia
+        ixx="8.56666309213479E-05"
+        ixy="2.71433694305194E-06"
+        ixz="3.07107849368164E-09"
+        iyy="0.000132334131938758"
+        iyz="3.26143525135964E-10"
+        izz="0.000102345114819944" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="0.2808 -0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="FR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0292994658484786 -0.057693080525891 -0.0271697654017704"
+        rpy="0 0 0" />
+      <mass
+        value="0.493837207405452" />
+      <inertia
+        ixx="0.00120611588222183"
+        ixy="-0.000236549205364421"
+        ixz="-0.000868352985021878"
+        iyy="0.00199589674409198"
+        iyz="-0.000216551652666458"
+        izz="0.00126368445819122" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.054 0.009 0"
+      rpy="0 0 0" />
+    <parent
+      link="FR_HipLink" />
+    <child
+      link="FR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0348034273391616 0 -0.101297406567852"
+        rpy="0 0 0" />
+      <mass
+        value="0.27925717852908" />
+      <inertia
+        ixx="0.00109125951304498"
+        ixy="-4.74281665660228E-19"
+        ixz="0.00041247807973686"
+        iyy="0.00127521789331124"
+        iyz="6.98966647343586E-19"
+        izz="0.00023311927940316" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1283 -0.0745 -0.1404"
+      rpy="0 0 0" />
+    <parent
+      link="FR_FemurLink" />
+    <child
+      link="FR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00808442270239448 -7.17880255240999E-10 0.0114064405962385"
+        rpy="0 0 0" />
+      <mass
+        value="0.0456321719316135" />
+      <inertia
+        ixx="9.09013287822567E-06"
+        ixy="-5.14601586625647E-11"
+        ixz="1.5154823661083E-07"
+        iyy="9.32435455625329E-06"
+        iyz="1.79287300355975E-12"
+        izz="1.41628502683047E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/FR_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.063753 0 -0.2336"
+      rpy="0 0 0" />
+    <parent
+      link="FR_TibiaLink" />
+    <child
+      link="FR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RL_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0495780689695432 -0.0168646109812233 -3.14997337524936E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.184246862844944" />
+      <inertia
+        ixx="8.56666309213481E-05"
+        ixy="-2.71433694305194E-06"
+        ixz="3.0710784937006E-09"
+        iyy="0.000132334131938758"
+        iyz="-3.26143525123702E-10"
+        izz="0.000102345114819944" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1864 0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RL_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.175"
+      upper="1.571"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.029299465848478 0.0576930805258911 -0.027169765401769"
+        rpy="0 0 0" />
+      <mass
+        value="0.493837207405452" />
+      <inertia
+        ixx="0.00120611588222183"
+        ixy="0.000236549205364421"
+        ixz="-0.000868352985021879"
+        iyy="0.00199589674409198"
+        iyz="0.000216551652666458"
+        izz="0.00126368445819122" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.0539999999999997 -0.00900000000000012 0"
+      rpy="0 0 0" />
+    <parent
+      link="RL_HipLink" />
+    <child
+      link="RL_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0348034273391619 4.16333634234434E-17 -0.101297406567852"
+        rpy="0 0 0" />
+      <mass
+        value="0.27925717852908" />
+      <inertia
+        ixx="0.00109125951304498"
+        ixy="-2.18675422752912E-19"
+        ixz="0.000412478079736864"
+        iyy="0.00127521789331125"
+        iyz="4.94395026110334E-19"
+        izz="0.000233119279403163" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.128298296280577 0.0745 -0.140402280570314"
+      rpy="0 0 0" />
+    <parent
+      link="RL_FemurLink" />
+    <child
+      link="RL_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00811028172727335 -7.17880171974272E-10 0.0114056687365631"
+        rpy="0 0 0" />
+      <mass
+        value="0.0456321719316135" />
+      <inertia
+        ixx="9.09013287822564E-06"
+        ixy="-5.14601586646141E-11"
+        ixz="1.51548236610816E-07"
+        iyy="9.32435455625329E-06"
+        iyz="1.79287300540237E-12"
+        izz="1.41628502683047E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RL_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692007 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RL_TibiaLink" />
+    <child
+      link="RL_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RR_HipLink">
+    <inertial>
+      <origin
+        xyz="-0.0495780689695432 0.016864610981223 -3.14997337513834E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.184246862844944" />
+      <inertia
+        ixx="8.5666630921348E-05"
+        ixy="2.71433694305195E-06"
+        ixz="3.07107849367114E-09"
+        iyy="0.000132334131938758"
+        iyz="3.26143525140446E-10"
+        izz="0.000102345114819944" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_HipLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_HipLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_HipJoint"
+    type="revolute">
+    <origin
+      xyz="-0.1864 -0.1 0.037"
+      rpy="0 0 0" />
+    <parent
+      link="MainBody" />
+    <child
+      link="RR_HipLink" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.571"
+      upper="0.175"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_FemurLink">
+    <inertial>
+      <origin
+        xyz="-0.0292994658484779 -0.0576930805258912 -0.0271697654017689"
+        rpy="0 0 0" />
+      <mass
+        value="0.493837207405452" />
+      <inertia
+        ixx="0.00120611588222183"
+        ixy="-0.000236549205364421"
+        ixz="-0.000868352985021879"
+        iyy="0.00199589674409198"
+        iyz="-0.000216551652666458"
+        izz="0.00126368445819122" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_FemurLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_FemurLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_FemurJoint"
+    type="revolute">
+    <origin
+      xyz="-0.0539999999999997 0.00900000000000001 0"
+      rpy="0 0 0" />
+    <parent
+      link="RR_HipLink" />
+    <child
+      link="RR_FemurLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.785"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_TibiaLink">
+    <inertial>
+      <origin
+        xyz="0.0348034273391619 -1.11022302462516E-16 -0.101297406567852"
+        rpy="0 0 0" />
+      <mass
+        value="0.27925717852908" />
+      <inertia
+        ixx="0.00109125951304497"
+        ixy="3.4460668316651E-19"
+        ixz="0.000412478079736864"
+        iyy="0.00127521789331125"
+        iyz="-3.16817507176884E-19"
+        izz="0.000233119279403161" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_TibiaLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.76078431372549 0.4 0.180392156862745 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_TibiaLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_TibiaJoint"
+    type="revolute">
+    <origin
+      xyz="-0.128298296280577 -0.0745000000000001 -0.140402280570314"
+      rpy="0 0 0" />
+    <parent
+      link="RR_FemurLink" />
+    <child
+      link="RR_TibiaLink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.571"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_FootLink">
+    <inertial>
+      <origin
+        xyz="0.00811028172727291 -7.17880144218697E-10 0.0114056687365631"
+        rpy="0 0 0" />
+      <mass
+        value="0.0456321719316137" />
+      <inertia
+        ixx="9.09013287822572E-06"
+        ixy="-5.14601586558486E-11"
+        ixz="1.51548236610812E-07"
+        iyy="9.32435455625331E-06"
+        iyz="1.79287300219877E-12"
+        izz="1.41628502683048E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_FootLink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://FullAssemblyCollisions/meshes/RR_FootLink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_FootJoint"
+    type="fixed">
+    <origin
+      xyz="0.0637534602692004 0 -0.233603271727562"
+      rpy="0 0 0" />
+    <parent
+      link="RR_TibiaLink" />
+    <child
+      link="RR_FootLink" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>

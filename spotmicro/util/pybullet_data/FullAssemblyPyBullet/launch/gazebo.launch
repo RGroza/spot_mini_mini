@@ -10,7 +10,7 @@
     name="spawn_model"
     pkg="gazebo_ros"
     type="spawn_model"
-    args="-file $(find FullAssemblyPyBullet)/urdf/FullAssemblyPyBullet.urdf -urdf -model FullAssemblyPyBullet"
+    args="-file $(find _FullAssemblyPyBullet)/urdf/_FullAssemblyPyBullet.urdf -urdf -model _FullAssemblyPyBullet"
     output="screen" />
   <node
     name="fake_joint_calibration"

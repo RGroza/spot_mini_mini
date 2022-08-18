@@ -1,10 +1,10 @@
 <package format="2">
-  <name>FullAssemblyPyBullet</name>
+  <name>_FullAssemblyPyBullet</name>
   <version>1.0.0</version>
   <description>
-    <p>URDF Description package for FullAssemblyPyBullet</p>
+    <p>URDF Description package for _FullAssemblyPyBullet</p>
     <p>This package contains configuration data, 3D models and launch files
-for FullAssemblyPyBullet robot</p>
+for _FullAssemblyPyBullet robot</p>
   </description>
   <author>TODO</author>
   <maintainer email="TODO@email.com" />
